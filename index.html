@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e3b341">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="الذهب والدولار">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="author" content="Mohamed Fayez">
 <title>أسعار الذهب والدولار اليوم</title>
 <style>
 :root{--bg:#0d1117;--card:#161b22;--line:#262d38;--tx:#e6edf3;--mu:#8b949e;--gold:#e3b341;--grn:#3fb950;--red:#f85149;--blu:#58a6ff}
@@ -35,12 +43,21 @@ td.n{direction:ltr}
 .note{font-size:.78rem;color:var(--mu);margin-top:10px}
 footer{font-size:.78rem;color:var(--mu);margin-top:18px}
 footer a{color:var(--blu)}
+.byline{font-size:.68rem;letter-spacing:.45em;color:var(--gold);opacity:.8;font-weight:600;direction:ltr;text-align:left}
+.credit{margin-top:22px;text-align:center;padding:20px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,rgba(227,179,65,.09),transparent 55%)}
+.credit-label{display:block;font-size:.72rem;color:var(--mu);letter-spacing:.2em;margin-bottom:4px}
+.credit-name{display:inline-block;font-size:1.5rem;font-weight:800;letter-spacing:.02em;background:linear-gradient(90deg,#9a7420,#e3b341 22%,#fff6cf 50%,#e3b341 78%,#9a7420);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4.5s linear infinite}
+@keyframes shine{to{background-position:-200% center}}
+.credit-star{color:var(--gold);font-size:.8rem;vertical-align:middle;margin:0 8px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <h1>أسعار الذهب والدولار اليوم</h1>
+  <div>
+    <h1>أسعار الذهب والدولار اليوم</h1>
+    <div class="byline">MOHAMED FAYEZ</div>
+  </div>
   <div class="status"><span class="dot" id="dot"></span><span id="st">جاري التحميل...</span><button id="rf">تحديث الآن</button></div>
 </header>
 
@@ -80,6 +97,10 @@ footer a{color:var(--blu)}
 <footer>
 <p>المصادر: الذهب من <a href="https://gold-api.com" target="_blank" rel="noopener">gold-api.com</a> (بيتحدث كل 30 ثانية تقريباً). الدولار الحالي من <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">exchangerate-api.com</a> (بيتحدث يومياً)، والرسم التاريخي من <a href="https://frankfurter.dev" target="_blank" rel="noopener">frankfurter.dev</a> (أسعار ECB اليومية).</p>
 <p>جرام الذهب = سعر الأونصة ÷ 31.1035 × سعر الدولار × (العيار ÷ 24). الأسعار مرجعية وليست عروض بيع، وممكن تختلف عن البنوك ومحلات الصاغة. مش نصيحة استثمارية.</p>
+<div class="credit">
+  <span class="credit-label">تصميم وتطوير</span>
+  <span class="credit-star">✦</span><span class="credit-name">محمد فايز</span><span class="credit-star">✦</span>
+</div>
 </footer>
 </div>
 
@@ -159,6 +180,11 @@ $('rf').onclick=()=>refresh();
   setInterval(()=>refresh('gold'),REFRESH_GOLD);
   setInterval(()=>refresh('usd'),REFRESH_USD);
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+{
+  "name": "أسعار الذهب والدولار اليوم",
+  "short_name": "الذهب والدولار",
+  "description": "أسعار الذهب والدولار في مصر لحظياً: جرام كل العيارات، الجنيه الذهب، وحاسبات التحويل.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#e3b341",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
