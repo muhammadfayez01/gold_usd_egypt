@@ -1,4 +1,4 @@
-const CACHE = 'gold-usd-v3';
+const CACHE = 'gold-usd-v5';
 const SHELL = ['./', './index.html', './lwc.js', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
