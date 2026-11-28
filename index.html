@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="الذهب والدولار">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="author" content="Mohamed Fayez">
 <meta name="description" content="أسعار الذهب والدولار في مصر لحظياً مع شموع يومية وأسبوعية وشهرية. محمد فايز: أرقام بتحكي.">
 <title>أرقام بتحكي | الذهب والدولار في مصر</title>
@@ -149,6 +149,7 @@ footer{margin-top:30px;text-align:center}
 @keyframes fadeup{from{opacity:0;transform:translateY(14px)}}
 [data-theme=light] .nm{filter:drop-shadow(0 0 6px rgba(7,151,140,.35))}
 [data-theme=light] .ring text,[data-theme=light] .tag{text-shadow:none}
+.pt{font-size:.62rem;font-weight:700;opacity:.75;border:1px solid currentColor;border-radius:6px;padding:0 4px;margin-right:3px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -189,18 +190,23 @@ footer{margin-top:30px;text-align:center}
     <div class="card"><h2>الدولار مقابل الجنيه (USD/EGP)</h2><div class="val teal sk" id="usd">--</div><div class="small" id="usdsub">&nbsp;</div><div class="story" id="st_usd"></div></div>
     <div class="card"><h2>أونصة الذهب بالدولار</h2><div class="val gold sk" id="oz">--</div><div class="small" id="ozsub">&nbsp;</div><div class="story" id="st_oz"></div></div>
     <div class="card"><h2>جرام الذهب <span id="kl">عيار 21</span> بالجنيه</h2><div class="val gold sk" id="gram">--</div><div class="small" id="gramsub">&nbsp;</div><div class="story" id="st_gram"></div></div>
-    <div class="card"><h2>الجنيه الذهب (8 جرام عيار 21)</h2><div class="val gold sk" id="pound">--</div><div class="small">بدون مصنعية</div><div class="story" id="st_pound"></div></div>
+    <div class="card"><h2>الجنيه الذهب (8 جرام عيار 21)</h2><div class="val gold sk" id="pound">--</div><div class="small" id="poundsub">بدون مصنعية</div><div class="story" id="st_pound"></div></div>
+  </div>
+
+  <div class="card panel" id="loc">
+    <h2>السوق المحلي: ذهب عيار 21 (سعر تجار الجرام)</h2>
+    <div id="locbody"><div class="small">جاري جلب سعر السوق المحلي...</div></div>
+    <div class="honest" id="locsrc"></div>
   </div>
 
   <div class="card panel">
     <div class="chead">
-      <div class="seg" id="asset" role="tablist"><button data-a="gold" class="on">ذهب أونصة $</button><button data-a="gram">جرام 21 بالجنيه</button><button data-a="usd">دولار / جنيه</button><button data-a="cmp">مقارنة</button></div>
+      <div class="seg" id="asset" role="tablist"><button data-a="gold" class="on">ذهب أونصة $ <small class="pt">PAXG</small></button><button data-a="gram">جرام 21 <small class="pt">محسوب</small></button><button data-a="usd">دولار / جنيه</button><button data-a="cmp">مقارنة</button></div>
       <div class="seg" id="tf"><button data-t="d" class="on">يوم</button><button data-t="w">أسبوع</button><button data-t="m">شهر</button></div><div class="seg" id="cr" style="display:none"><button data-r="90">3 شهور</button><button data-r="180">6 شهور</button><button data-r="365" class="on">سنة</button><button data-r="0">الكل</button></div>
     </div>
     <div class="ohlc" id="ohlc">&nbsp;</div>
     <div id="chart"><div class="cmsg sk" id="cmsg">جاري تحميل الشموع...</div></div>
-    <div class="note" id="cnote"></div>
-    <div class="honest" id="mknote"></div>
+        <div class="honest" id="mknote"></div>
   </div>
 
   <div class="card panel" id="wi">
@@ -217,7 +223,7 @@ footer{margin-top:30px;text-align:center}
   <div class="card panel" id="alc">
     <h2>تنبيه سعر (داخل الصفحة)</h2>
     <div class="al">
-      <div><label for="alas">الأصل</label><select id="alas"><option value="oz">أونصة الذهب $</option><option value="gram">جرام 21 (جنيه)</option><option value="usd">الدولار (جنيه)</option></select></div>
+      <div><label for="alas">الأصل</label><select id="alas"><option value="oz">أونصة الذهب $</option><option value="gram">جرام 21 عالمي محسوب (جنيه)</option><option value="usd">الدولار (جنيه)</option></select></div>
       <div><label for="aldir">لما السعر</label><select id="aldir"><option value="up">يعدّي فوق</option><option value="down">ينزل تحت</option></select></div>
       <div><label for="allv">المستوى</label><input id="allv" type="number" step="any" min="0" style="direction:ltr;text-align:center"></div>
       <div><button type="button" id="aladd">أضف التنبيه</button></div>
@@ -230,8 +236,9 @@ footer{margin-top:30px;text-align:center}
   <div class="card panel">
     <h2>اختار العيار</h2>
     <div class="tabs" id="tabs"></div>
-    <div class="row"><label for="prem">فرق السوق المحلي عن السعر العالمي (%)</label><input id="prem" type="range" min="-5" max="15" step="0.5" value="0"><b id="premv" dir="ltr">0%</b></div>
-    <div class="note">السعر المحسوب هو السعر العالمي محوّل للجنيه. السوق المحلي في مصر غالباً أعلى بنسبة بسيطة، حرّك الشريط لتقرّب للسعر عند الصايغ.</div>
+    <div class="row"><label>مصدر سعر الجرام والجنيه الذهب</label><div class="seg" id="pm"><button type="button" data-m="local" class="on">سعر السوق المحلي</button><button type="button" data-m="global">السعر العالمي (محسوب)</button></div></div>
+    <div class="note" id="pmnote"></div>
+  </div>
   </div>
 
   <div class="two">
@@ -258,7 +265,7 @@ footer{margin-top:30px;text-align:center}
 <text class="mf" x="98" y="112" text-anchor="middle" style="font-size:42px">MF</text>
     </svg>
     <div class="credit">تصميم وتطوير<b>محمد فايز</b></div>
-    <p class="legal">الأسعار مرجعية وليست عروض بيع، وممكن تختلف عن البنوك ومحلات الصاغة. سعر الجرام = سعر الأونصة ÷ 31.1035 × سعر الدولار × (العيار ÷ 24). الشموع: ذهب = PAXG/USD (توكن مدعوم بأونصة ذهب، قريب من الذهب الفوري لكنه مش نفسه)، الدولار = سعر يومي من Frankfurter. مش نصيحة استثمارية.</p>
+    <p class="legal">الأسعار مرجعية وليست عروض بيع، وممكن تختلف عن البنوك ومحلات الصاغة. مصادر البيانات: أونصة الذهب اللحظية gold-api.com، والدولار اللحظي open.er-api.com، والدولار اليومي Frankfurter. شموع الذهب = PAXG/USD (توكن مدعوم بأونصة ذهب) من Binance، قريبة من الذهب الفوري لكنها مش نفس السعر. جرام 21 العالمي = محسوب: سعر الأونصة ÷ 31.1035 × سعر الدولار × (العيار ÷ 24)، وشموع الجرام والمقارنة محسوبة من PAXG والدولار اليومي. سعر السوق المحلي من دليلك (getdaleelak.com) سعر تجار للجرام بدون مصنعية ولا دمغة. مش نصيحة استثمارية.</p>
   </footer>
 </div>
 
@@ -267,7 +274,7 @@ footer{margin-top:30px;text-align:center}
 const OZ_G=31.1035, KARATS=[24,22,21,18];
 const $=id=>document.getElementById(id);
 const fmt=(n,d=2)=>n==null||isNaN(n)?'--':n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
-const S={usd:null,usdAt:null,oz:null,ozAt:null,k:21,prem:0,prevOz:null,prevUsd:null,gold:[],fx:[],asset:'gold',tf:'d',cr:365,theme:'dark'};
+const S={usd:null,usdAt:null,oz:null,ozAt:null,k:21,pm:'local',prevOz:null,prevUsd:null,gold:[],fx:[],asset:'gold',tf:'d',cr:365,theme:'dark'};
 try{S.theme=localStorage.getItem('theme')||'dark'}catch(e){}
 document.documentElement.dataset.theme=S.theme;
 async function j(u,t=15000){const c=new AbortController();const id=setTimeout(()=>c.abort(),t);try{const r=await fetch(u,{cache:'no-store',signal:c.signal});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(id)}}
@@ -278,8 +285,55 @@ const sgn=p=>'\u2066'+(p>=0?'+':'')+fmt(p,2)+'%\u2069';
 /* ---------- live ---------- */
 async function loadGold(){const d=await j('https://api.gold-api.com/price/XAU');if(!(d.price>0))throw new Error('bad');S.prevOz=S.oz;S.oz=d.price;S.ozAt=new Date(d.updatedAt)}
 async function loadUsd(){const d=await j('https://open.er-api.com/v6/latest/USD');if(d.result!=='success'||!d.rates.EGP)throw new Error('bad');S.prevUsd=S.usd;S.usd=d.rates.EGP;S.usdAt=new Date(d.time_last_update_unix*1000)}
+const esc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function loadLocal(){
+  LOCAL.ok=false;
+  try{
+    const d=await j('https://getdaleelak.com/api/v1/feed.json?asset=gold-21k',12000);
+    const a=(d.assets||[]).find(x=>x.id==='GOLD21K-EGP');
+    if(!a)throw new Error('no asset');
+    const buy=a.directions&&a.directions.buy&&a.directions.buy.best&&+a.directions.buy.best.value;
+    const sell=a.directions&&a.directions.sell&&a.directions.sell.best&&+a.directions.sell.best.value;
+    const glob=a.global&&+a.global.value;const at=new Date(a.observedAt);
+    if(!(buy>0&&sell>0&&glob>0)||isNaN(at))throw new Error('bad data');
+    if(a.freshness&&a.freshness.stale){LOCAL.msg='بيانات السوق المحلي عند المصدر قديمة (stale)';throw new Error('stale')}
+    if(Date.now()-at>3*3600e3){LOCAL.msg='آخر تحديث للسوق المحلي من أكتر من 3 ساعات';throw new Error('old')}
+    if(Math.abs(buy/glob-1)>0.15||Math.abs(sell/glob-1)>0.15){LOCAL.msg='الأرقام المحلية بعيدة جداً عن العالمي ومش مقبولة';throw new Error('outlier')}
+    if(S.oz&&S.usd&&Math.abs(glob/g21()-1)>0.03){LOCAL.msg='السعر العالمي عند المصدر مش متطابق مع حسابنا';throw new Error('mismatch')}
+    LOCAL.buy=buy;LOCAL.sell=sell;LOCAL.glob=glob;LOCAL.at=at;
+    LOCAL.sellers=(a.sellers||[]).filter(x=>+x.buy>0&&+x.sell>0).map(x=>({n:x.sellerAr||x.seller,buy:+x.buy,sell:+x.sell}));
+    LOCAL.series=(a.series||[]).filter(x=>+x.sellLo>0&&+x.buyHi>0&&+x.global>0);
+    LOCAL.ok=true;LOCAL.msg='';
+  }catch(e){if(!LOCAL.msg)LOCAL.msg='تعذر جلب السوق المحلي من دليلك';LOCAL.ok=false}
+}
+function gapStory(){
+  const sr=LOCAL.series;if(sr.length<5)return '';
+  const gaps=sr.map(x=>pct(x.global,x.sellLo));const avg=gaps.reduce((a,b)=>a+b,0)/gaps.length;
+  const today=pct(LOCAL.glob,LOCAL.buy);
+  return `فرق الشراء عن السعر العالمي النهارده ${sgn(today)}، ومتوسط آخر ${sr.length} يوم ${sgn(avg)} (أدنى ${sgn(Math.min(...gaps))} وأعلى ${sgn(Math.max(...gaps))}).`;
+}
+function renderLocal(){
+  const b=$('locbody'),src=$('locsrc');
+  document.querySelectorAll('#pm button').forEach(x=>{x.classList.toggle('on',x.dataset.m===(useLocal()?'local':'global'));x.disabled=!LOCAL.ok&&x.dataset.m==='local'});
+  if(!LOCAL.ok){
+    b.innerHTML='<div class="small" style="color:var(--gold)"><b>'+esc(LOCAL.msg||'جاري جلب سعر السوق المحلي...')+'</b>. بنعرض السعر العالمي المحسوب (مرجعي): سعر السوق في مصر غالباً أعلى بنسبة بسيطة.</div>';
+    src.innerHTML='';$('pmnote').textContent=LOCAL.msg?'الأسعار المعروضة دلوقتي: عالمي محسوب (مرجعي، بدون مصنعية).':'';return}
+  const gb=pct(LOCAL.glob,LOCAL.buy),gs=pct(LOCAL.glob,LOCAL.sell);
+  const mins=Math.max(0,Math.round((Date.now()-LOCAL.at)/60000));
+  const rows=LOCAL.sellers.slice().sort((x,y)=>x.sell-y.sell).slice(0,6).map(x=>`<tr><td>${esc(x.n)}</td><td class="n">${fmt(x.sell,0)}</td><td class="n">${fmt(x.buy,0)}</td></tr>`).join('');
+  b.innerHTML=`<div class="res">
+   <div class="win"><h3>لو بتشتري (أحسن سعر)</h3><div class="v">${fmt(LOCAL.buy,0)} جنيه</div><div class="small">الفرق عن العالمي <b class="${gb>=0?'up':'down'}">${sgn(gb)}</b></div></div>
+   <div><h3>لو بتبيع (أحسن سعر)</h3><div class="v">${fmt(LOCAL.sell,0)} جنيه</div><div class="small">الفرق عن العالمي <b class="${gs>=0?'up':'down'}">${sgn(gs)}</b></div></div>
+   <div><h3>العالمي المحسوب (نفس اللحظة)</h3><div class="v">${fmt(LOCAL.glob,0)} جنيه</div><div class="small">سعر مرجعي بدون فرق السوق</div></div></div>
+   <div class="story big2" style="text-align:right;margin-top:12px">${esc(gapStory())}</div>
+   ${rows?`<table style="margin-top:8px"><thead><tr><th>التاجر</th><th>تدفع لو بتشتري</th><th>بتاخد لو بتبيع</th></tr></thead><tbody>${rows}</tbody></table>`:''}`;
+  src.innerHTML=`المصدر: <a href="https://getdaleelak.com" target="_blank" rel="noopener" style="color:var(--teal)">دليلك (getdaleelak.com)</a> · آخر ملاحظة ${LOCAL.at.toLocaleTimeString('ar-EG')} (من ${mins} دقيقة). سعر تجار للجرام <b>بدون مصنعية ولا دمغة</b>، وسعر الصاغة في المحل ممكن يختلف. مؤشر للاسترشاد، مش عرض بيع.`;
+  $('pmnote').textContent=useLocal()?'الجرام والجنيه الذهب بيتحسبوا على أحسن سعر شراء عند التجار (دليلك) لعيار 21، وباقي العيارات بنسبة العيار إلى 21 (افتراض، مش سعر مسجل لكل عيار).':'الأسعار المعروضة: عالمي محسوب (مرجعي، بدون فرق السوق ولا مصنعية).';
+}
 const g21=()=>S.oz&&S.usd?S.oz/OZ_G*S.usd*21/24:null;
-function gramPrice(k){return S.oz&&S.usd?S.oz/OZ_G*S.usd*(k/24)*(1+S.prem/100):null}
+const LOCAL={ok:false,msg:'',buy:null,sell:null,glob:null,at:null,sellers:[],series:[]};
+const useLocal=()=>LOCAL.ok&&S.pm==='local';
+function gramPrice(k){if(!S.oz||!S.usd)return null;if(useLocal())return LOCAL.buy*k/21;return S.oz/OZ_G*S.usd*(k/24)}
 const shown={};
 function setNum(id,v,d,pre=''){const el=$(id);if(v==null){return}el.classList.remove('sk');
   const from=shown[id]??v;shown[id]=v;if(from===v||matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=pre+fmt(v,d);return}
@@ -345,9 +399,9 @@ function stories(){
     const ozp=pct(S.gold[n-31].close,S.gold[n-1].close);
     const fxp=pct(fxAt(S.gold[n-31].time),fxAt(S.gold[n-1].time));
     const p=pct(g30,lastG);
-    out.gram=`جرام 21 ${up(p,'زاد','قلّ')} ${fmt(Math.abs(p),1)}% في 30 يوم (محسوب). الذهب بالدولار ${up(ozp,'زاد','قلّ')} ${fmt(Math.abs(ozp),1)}% والدولار ${up(fxp,'زاد','قلّ')} ${fmt(Math.abs(fxp),1)}%.`;
+    out.gram=`جرام 21 (عالمي محسوب) ${up(p,'زاد','قلّ')} ${fmt(Math.abs(p),1)}% في 30 يوم (محسوب). الذهب بالدولار ${up(ozp,'زاد','قلّ')} ${fmt(Math.abs(ozp),1)}% والدولار ${up(fxp,'زاد','قلّ')} ${fmt(Math.abs(fxp),1)}%.`;
     const diff=(lastG-g30)*8;
-    out.pound=`الجنيه الذهب (محسوب) ${up(diff,'أغلى','أرخص')} بحوالي ${fmt(Math.abs(diff),0)} جنيه من قبل 30 يوم.`;
+    out.pound=`الجنيه الذهب (عالمي محسوب) ${up(diff,'أغلى','أرخص')} بحوالي ${fmt(Math.abs(diff),0)} جنيه من قبل 30 يوم.`;
   }
   return out;
 }
@@ -362,19 +416,19 @@ function render(){
   $('ozsub').innerHTML=S.ozAt?arrow(S.oz,S.prevOz)+'≈ '+fmt(S.oz*S.usd,0)+' جنيه | '+S.ozAt.toLocaleTimeString('ar-EG'):'&nbsp;';
   $('kl').textContent='عيار '+S.k;
   const g=gramPrice(S.k);setNum('gram',g,0);
-  $('gramsub').textContent=g?'جرام عيار '+S.k+' (حسب الشريط: '+(S.prem>0?'+':'')+S.prem+'%)':'';
-  const gg=gramPrice(21);setNum('pound',gg?gg*8:null,0);
+  $('gramsub').textContent=g?'جرام عيار '+S.k+' | '+(useLocal()?'سعر السوق (دليلك، شراء)':'عالمي محسوب'):'';
+  const gg=gramPrice(21);setNum('pound',gg?gg*8:null,0);$('poundsub').textContent=useLocal()?'سعر السوق (دليلك)، بدون مصنعية':'عالمي محسوب، بدون مصنعية';
   $('tb').innerHTML=KARATS.map(k=>`<tr><td>عيار ${k}</td><td class="n">${fmt(gramPrice(k),0)}</td></tr>`).join('');
   $('gres').textContent=g?fmt((+$('g').value||0)*g,0)+' جنيه':'--';
   $('dres').textContent=S.usd?fmt((+$('d').value||0)*S.usd,2)+' جنيه':'--';
   $('tabs').innerHTML=KARATS.map(k=>`<button type="button" class="${k===S.k?'on':''}" data-k="${k}">عيار ${k}</button>`).join('');
-  const tk=`MOHAMED FAYEZ<i>✦</i>XAU/USD $${fmt(S.oz)}<i>✦</i>USD/EGP ${fmt(S.usd)}<i>✦</i>21K GRAM EGP ${fmt(g21(),0)}<i>✦</i>NUMBERS TELL STORIES<i>✦</i>`;
+  const tk=`MOHAMED FAYEZ<i>✦</i>XAU/USD $${fmt(S.oz)}<i>✦</i>USD/EGP ${fmt(S.usd)}<i>✦</i>21K GRAM EGP ${fmt(gramPrice(21),0)}<i>✦</i>NUMBERS TELL STORIES<i>✦</i>`;
   $('tk').innerHTML=tk+tk;
   if(S.oz&&S.usd)$('sealtxt').textContent=`MOHAMED FAYEZ • NUMBERS TELL STORIES • XAU $${fmt(S.oz,0)} • USD/EGP ${fmt(S.usd,2)} •`;
   if(ST.chips)$('chips').innerHTML=ST.chips.map(c=>`<span class="chip ${c[1]>=0?'up':'down'}" dir="rtl"><small>${c[0]}</small>${sgn(c[1])}</span>`).join('');
   $('bigstory').textContent=ST.big||'';
   [['st_oz','oz'],['st_usd','usd'],['st_gram','gram'],['st_pound','pound']].forEach(([i,k])=>{$(i).textContent=ST[k]||'';$(i).style.display=ST[k]?'':'none'});
-  checkAlerts();
+  renderLocal();checkAlerts();
 }
 function setStatus(ok,msg){$('dot').className='dot '+(ok?'live':'err');$('st').textContent=msg}
 async function refresh(which){
@@ -456,7 +510,6 @@ function markers(c){
   return mk;
 }
 function drawChart(){
-  $('cnote').innerHTML=NOTES[S.asset];
   document.querySelectorAll('#asset button').forEach(b=>b.classList.toggle('on',b.dataset.a===S.asset));
   document.querySelectorAll('#tf button').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tf));
   document.querySelectorAll('#cr button').forEach(b=>b.classList.toggle('on',+b.dataset.r===S.cr));
@@ -548,7 +601,7 @@ function applyTheme(){document.documentElement.dataset.theme=S.theme;$('th').tex
   if(chart){chart.applyOptions(cTheme());drawChart()}}
 $('th').onclick=()=>{S.theme=S.theme==='light'?'dark':'light';applyTheme()};
 $('tabs').onclick=e=>{const k=e.target.dataset.k;if(k){S.k=+k;render()}};
-$('prem').oninput=e=>{S.prem=+e.target.value;$('premv').textContent=S.prem+'%';render()};
+$('pm').onclick=e=>{const m=e.target.dataset.m;if(m&&!e.target.disabled){S.pm=m;render()}};
 $('g').oninput=$('d').oninput=render;
 $('rf').onclick=()=>refresh();
 $('asset').onclick=e=>{const a=e.target.dataset.a;if(a){S.asset=a;drawChart()}};
@@ -559,7 +612,7 @@ $('wiq').onclick=e=>{const d=e.target.dataset.d;if(d){$('widate').value=dstr(Dat
 applyTheme();drawAl();
 (async()=>{
   render();
-  refresh().then(()=>{setInterval(()=>refresh('gold'),30000);setInterval(()=>refresh('usd'),300000)});
+  refresh().then(()=>{loadLocal().then(render);setInterval(()=>refresh('gold'),30000);setInterval(()=>refresh('usd'),300000);setInterval(()=>loadLocal().then(render),300000)});
   const [g,f]=await Promise.allSettled([loadGoldDaily(),loadFxDaily()]);
   if(g.status==='fulfilled')S.gold=g.value;if(f.status==='fulfilled')S.fx=f.value;
   if(!S.gold.length||!S.fx.length){$('cmsg').classList.remove('sk');$('cmsg').textContent='تعذر تحميل بيانات الشموع، جرّب التحديث بعد قليل';$('big').classList.remove('sk');return}
@@ -570,7 +623,24 @@ applyTheme();drawAl();
 })();
 </script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+if('serviceWorker' in navigator){
+  const hadCtl=!!navigator.serviceWorker.controller;let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(!hadCtl||reloading)return;reloading=true;
+    try{sessionStorage.setItem('justUpdated','1')}catch(e){}
+    location.reload();
+  });
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{
+      const chk=()=>reg.update().catch(()=>{});
+      document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});
+      setInterval(chk,30*60*1000);
+    }).catch(()=>{});
+    try{if(sessionStorage.getItem('justUpdated')){sessionStorage.removeItem('justUpdated');
+      const t=document.createElement('div');t.className='toast';t.style.borderColor='var(--teal)';t.textContent='تم التحديث ✓ بقيت على آخر نسخة';
+      $('toasts').appendChild(t);setTimeout(()=>t.remove(),3500)}}catch(e){}
+  });
+}
 </script>
 </body>
 </html>

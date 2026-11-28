@@ -1,7 +1,8 @@
 {
+  "id": "/gold_usd_egypt/",
   "name": "أسعار الذهب والدولار اليوم",
   "short_name": "الذهب والدولار",
-  "description": "أسعار الذهب والدولار في مصر لحظياً: جرام كل العيارات، الجنيه الذهب، وحاسبات التحويل.",
+  "description": "أسعار الذهب والدولار في مصر لحظياً: جرام كل العيارات، الجنيه الذهب، شموع وسعر السوق المحلي، وحاسبات.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./",
@@ -11,7 +12,9 @@
   "background_color": "#050a0f",
   "theme_color": "#050a0f",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "icon-v2-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-v2-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-v2-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-v2-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
